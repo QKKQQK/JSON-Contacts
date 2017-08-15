@@ -14,6 +14,7 @@
 		51BE9F621F433D6E00FC7EF1 /* small-contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = 51BE9F611F433D6D00FC7EF1 /* small-contacts.json */; };
 		51BE9F641F433DD200FC7EF1 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE9F631F433DD200FC7EF1 /* Utilities.swift */; };
 		51BE9F661F433E5900FC7EF1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE9F651F433E5900FC7EF1 /* TableViewController.swift */; };
+		51BE9F681F43402E00FC7EF1 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE9F671F43402E00FC7EF1 /* Contacts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		51BE9F611F433D6D00FC7EF1 /* small-contacts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "small-contacts.json"; path = "../../../small-contacts.json"; sourceTree = "<group>"; };
 		51BE9F631F433DD200FC7EF1 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = "../../../notes/xcode-projects/FirstJSON/FirstJSON/Utilities.swift"; sourceTree = "<group>"; };
 		51BE9F651F433E5900FC7EF1 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		51BE9F671F43402E00FC7EF1 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				51BE9F4E1F433D2300FC7EF1 /* AppDelegate.swift */,
 				51BE9F521F433D2300FC7EF1 /* Main.storyboard */,
 				51BE9F651F433E5900FC7EF1 /* TableViewController.swift */,
+				51BE9F671F43402E00FC7EF1 /* Contacts.swift */,
 				51BE9F551F433D2300FC7EF1 /* Assets.xcassets */,
 				51BE9F571F433D2300FC7EF1 /* LaunchScreen.storyboard */,
 				51BE9F631F433DD200FC7EF1 /* Utilities.swift */,
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51BE9F681F43402E00FC7EF1 /* Contacts.swift in Sources */,
 				51BE9F641F433DD200FC7EF1 /* Utilities.swift in Sources */,
 				51BE9F661F433E5900FC7EF1 /* TableViewController.swift in Sources */,
 				51BE9F4F1F433D2300FC7EF1 /* AppDelegate.swift in Sources */,
