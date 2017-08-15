@@ -1,0 +1,74 @@
+[
+  {
+    "firstName" : "Aaron",
+    "lastName" : "Sears",
+    "email" : "aaron@sears.com",
+    "cell" : "608-555-0001"
+  },
+  {
+    "firstName" : "Adam",
+    "lastName" : "Rosa",
+    "email" : "adam@rosa.com",
+    "cell" : "608-555-0002"
+  },
+  {
+    "firstName" : "Adlai",
+    "lastName" : "Hinton",
+    "email" : "adlai@hinton.com",
+    "cell" : "608-555-0003"
+  },
+  {
+    "firstName" : "Adrian",
+    "lastName" : "Morales",
+    "email" : "adrian@morales.com",
+    "cell" : "608-555-0004"
+  },
+  {
+    "firstName" : "Agatha",
+    "lastName" : "Stein",
+    "email" : "agatha@stein.com",
+    "cell" : "608-555-0005"
+  },
+  {
+    "firstName" : "Ahmed",
+    "lastName" : "Booker",
+    "email" : "ahmed@booker.com",
+    "cell" : "608-555-0006"
+  },
+  {
+    "firstName" : "Ahmet",
+    "lastName" : "Fowler",
+    "email" : "ahmet@fowler.com",
+    "cell" : "608-555-0007"
+  },
+  {
+    "firstName" : "Aimee",
+    "lastName" : "Fletcher",
+    "email" : "aimee@fletcher.com",
+    "cell" : "608-555-0008"
+  },
+  {
+    "firstName" : "Al",
+    "lastName" : "Deleon",
+    "email" : "al@deleon.com",
+    "cell" : "608-555-0009"
+  },
+  {
+    "firstName" : "Alain",
+    "lastName" : "Burnett",
+    "email" : "alain@burnett.com",
+    "cell" : "608-555-0010"
+  },
+  {
+    "firstName" : "Alan",
+    "lastName" : "Madden",
+    "email" : "alan@madden.com",
+    "cell" : "608-555-0011"
+  },
+  {
+    "firstName" : "Alastair",
+    "lastName" : "Farrell",
+    "email" : "alastair@farrell.com",
+    "cell" : "608-555-0012"
+  }
+]
