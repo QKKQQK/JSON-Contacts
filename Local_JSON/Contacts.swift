@@ -32,11 +32,63 @@ class Contacts {
     
     init() {
         contacts = []
-        createContactsPlistFile()
+        loadContacts()
     }
     
     var count: Int {
         return contacts.count
+    }
+    
+    func contact(at indexPath: IndexPath) -> Contact {
+        if indexPath.row >= contacts.count {
+            return contacts[0]
+        }
+        
+        return contacts[indexPath.row]
+    }
+    
+    func loadContacts() {
+        if isFirstLaunch() {
+            print("First launch, loading bundled JSON.")
+            contacts = loadBundledJSON()
+            createContactsPlistFile()
+        } else {
+            print("Loading contacts from app directory.")
+            contacts = loadSavedContacts()
+        }
+    }
+    
+    func loadBundledJSON() -> [Contact] {
+        let url = Bundle.main.url(forResource: "small-contacts", withExtension: "json")
+        
+        guard let jsonData = try? Data(contentsOf: url!) else {
+            return []
+        }
+        
+        let jsonDecoder = JSONDecoder()
+        // [Contact].self return the type
+        let contactsArray = try? jsonDecoder.decode([Contact].self, from: jsonData)
+        
+        return contactsArray ?? []
+    }
+    
+    func loadSavedContacts() -> [Contact] {
+        print("In loadSavedContacts")
+        
+        guard let contactsURL = applicationDirectory().appendingPathComponent("contacts.plist") else {
+            print("Can't create URl to app dir.")
+            return []
+        }
+        
+        guard let contactsData = try? Data.init(contentsOf: contactsURL) else {
+            print("Couldn't load data from app dir.")
+            return []
+        }
+        
+        let contactsDecoder = PropertyListDecoder()
+        let contactsArray = try? contactsDecoder.decode([Contact].self, from: contactsData)
+        
+        return contactsArray ?? []
     }
     
     func createContactsPlistFile() {

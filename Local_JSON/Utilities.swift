@@ -10,12 +10,15 @@ import Foundation
 
 func isFirstLaunch() -> Bool {
     let defaults = UserDefaults.standard
-    if defaults.bool(forKey: "FirstLaunch") == true {
+    
+    if defaults.bool(forKey: "isFirstLaunch") == true {
         print("First Launch!")
-        defaults.set(false, forKey: "FirstLaunch")
+        print(defaults.bool(forKey: "Launch"))
+        defaults.set(false, forKey: "isFirstLaunch")
         return true
     } else {
         print("Not first launch")
+        print(defaults.bool(forKey: "Launch"))
         return false
     }
 }
@@ -31,3 +34,4 @@ func applicationDirectory() -> NSURL {
     
     return documentsURL
 }
+
