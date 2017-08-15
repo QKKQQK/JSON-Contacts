@@ -13,12 +13,10 @@ func isFirstLaunch() -> Bool {
     
     if defaults.bool(forKey: "isFirstLaunch") == true {
         print("First Launch!")
-        print(defaults.bool(forKey: "Launch"))
         defaults.set(false, forKey: "isFirstLaunch")
         return true
     } else {
         print("Not first launch")
-        print(defaults.bool(forKey: "Launch"))
         return false
     }
 }

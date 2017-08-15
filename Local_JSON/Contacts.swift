@@ -49,7 +49,7 @@ class Contacts {
     
     func loadContacts() {
         if isFirstLaunch() {
-            print("First launch, loading bundled JSON.")
+            print("Loading bundled JSON.")
             contacts = loadBundledJSON()
             createContactsPlistFile()
         } else {
@@ -66,15 +66,13 @@ class Contacts {
         }
         
         let jsonDecoder = JSONDecoder()
-        // [Contact].self return the type
+        
         let contactsArray = try? jsonDecoder.decode([Contact].self, from: jsonData)
         
         return contactsArray ?? []
     }
     
     func loadSavedContacts() -> [Contact] {
-        print("In loadSavedContacts")
-        
         guard let contactsURL = applicationDirectory().appendingPathComponent("contacts.plist") else {
             print("Can't create URl to app dir.")
             return []
