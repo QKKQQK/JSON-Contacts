@@ -10,6 +10,8 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
+    let contacts = Contacts()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

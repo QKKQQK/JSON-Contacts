@@ -28,5 +28,28 @@ struct Contact: Codable, CustomStringConvertible {
 }
 
 class Contacts {
+    var contacts: [Contact]
     
+    init() {
+        contacts = []
+        createContactsPlistFile()
+    }
+    
+    func createContactsPlistFile() {
+        guard let contactsPlistFileURL = applicationDirectory().appendingPathComponent("contacts.plist") else {
+            print("Could not get the URL for the data save.")
+            return
+        }
+        
+        let plistEncoder = PropertyListEncoder()
+        
+        // nil if fail, contacts.self stands for type
+        let contactsData = try? plistEncoder.encode(contacts.self)
+        
+        do {
+            try contactsData?.write(to: contactsPlistFileURL)
+        } catch {
+            print(error)
+        }
+    }
 }
