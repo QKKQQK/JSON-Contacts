@@ -35,6 +35,10 @@ class Contacts {
         createContactsPlistFile()
     }
     
+    var count: Int {
+        return contacts.count
+    }
+    
     func createContactsPlistFile() {
         guard let contactsPlistFileURL = applicationDirectory().appendingPathComponent("contacts.plist") else {
             print("Could not get the URL for the data save.")
