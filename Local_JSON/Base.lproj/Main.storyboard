@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Contact-->
         <scene sceneID="rFW-T3-p61">
             <objects>
                 <tableViewController id="Xsd-zY-Z0Z" customClass="TableViewController" customModule="Local_JSON" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
                             <outlet property="delegate" destination="Xsd-zY-Z0Z" id="7is-h7-DHR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Title" id="KYk-LM-1iB">
+                    <navigationItem key="navigationItem" title="Contact" id="KYk-LM-1iB">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QI5-ML-Oj9">
                             <connections>
                                 <segue destination="heb-Sb-EO2" kind="show" id="4oC-cE-YsL"/>
@@ -47,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="288" y="73"/>
         </scene>
-        <!--Title-->
+        <!--Add New Contact-->
         <scene sceneID="dIE-FR-Q0h">
             <objects>
-                <tableViewController id="heb-Sb-EO2" sceneMemberID="viewController">
+                <tableViewController id="heb-Sb-EO2" customClass="NewContactTableViewController" customModule="Local_JSON" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="tpU-2j-Df7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,8 +135,12 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="qpg-7Y-7h4">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="SG6-vL-h2P"/>
+                    <navigationItem key="navigationItem" title="Add New Contact" id="qpg-7Y-7h4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="SG6-vL-h2P">
+                            <connections>
+                                <action selector="saveContact:" destination="heb-Sb-EO2" id="iPe-Zi-fFu"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
