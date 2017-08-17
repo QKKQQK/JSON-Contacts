@@ -65,7 +65,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -74,6 +74,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="ti3-KI-CnJ"/>
                     <connections>
+                        <outlet property="navbarTitle" destination="ti3-KI-CnJ" id="Q2O-ot-bqT"/>
                         <outlet property="textField" destination="Obo-JJ-1TK" id="dcG-4q-tnV"/>
                         <outlet property="toolbarButton" destination="OSF-XY-QYz" id="564-S3-ebQ"/>
                     </connections>

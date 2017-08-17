@@ -17,6 +17,8 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var toolbarButton: UIBarButtonItem!
     
+    @IBOutlet weak var navbarTitle: UINavigationItem!
+    
     @IBAction func toggleJSON(_ sender: UIBarButtonItem) {
         if viewingInfo {
             sender.title = "View Info"
@@ -30,8 +32,10 @@ class DetailViewController: UIViewController {
     func setText() {
         if viewingInfo {
             textField.text = contact?.detail
+            navbarTitle.title = "Info"
         } else {
             textField.text = contact?.formattedJSON
+            navbarTitle.title = "JSON"
         }
     }
     
