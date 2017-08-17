@@ -24,14 +24,22 @@ class DetailViewController: UIViewController {
             sender.title = "View JSON"
         }
         viewingInfo = !viewingInfo
+        setText()
     }
     
+    func setText() {
+        if viewingInfo {
+            textField.text = contact?.detail
+        } else {
+            textField.text = contact?.formattedJSON
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         toolbarButtonText = "View JSON"
         viewingInfo = true
-        textField.text = contact?.detail
+        setText()
     }
     
     override func didReceiveMemoryWarning() {
