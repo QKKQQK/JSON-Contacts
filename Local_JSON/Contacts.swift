@@ -22,6 +22,19 @@ struct Contact: Codable, CustomStringConvertible {
         return "\(firstName) \(lastName)\nEmail: \(email)\nCell#: \(cell)\n"
     }
     
+    var formattedJSON: String {
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        guard let json = try? encoder.encode(self) else {
+            print("Can't create JSON for contact")
+            return ""
+        }
+        
+        return String(data: json, encoding: .utf8) ?? ""
+    }
+    
     var description: String {
         return "\(firstName) \(lastName)"
     }
