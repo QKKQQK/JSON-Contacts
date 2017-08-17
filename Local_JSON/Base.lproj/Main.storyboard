@@ -44,7 +44,7 @@
         <!--Detail-->
         <scene sceneID="Mjy-2e-P1f">
             <objects>
-                <viewController id="xpc-59-7DC" sceneMemberID="viewController">
+                <viewController id="xpc-59-7DC" customClass="DetailViewController" customModule="Local_JSON" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="YES" id="b3H-s1-wTI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,7 +53,11 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="View JSON" width="437" id="OSF-XY-QYz"/>
+                                    <barButtonItem title="View JSON" width="437" id="OSF-XY-QYz">
+                                        <connections>
+                                            <action selector="toggleJSON:" destination="xpc-59-7DC" id="HN0-1b-z6H"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Obo-JJ-1TK">
@@ -69,6 +73,10 @@
                         <viewLayoutGuide key="safeArea" id="aN8-Em-2PU"/>
                     </view>
                     <navigationItem key="navigationItem" title="Detail" id="ti3-KI-CnJ"/>
+                    <connections>
+                        <outlet property="textField" destination="Obo-JJ-1TK" id="dcG-4q-tnV"/>
+                        <outlet property="toolbarButton" destination="OSF-XY-QYz" id="564-S3-ebQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cQb-MR-DCZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

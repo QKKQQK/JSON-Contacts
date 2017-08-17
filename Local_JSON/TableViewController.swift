@@ -42,4 +42,21 @@ class TableViewController: UITableViewController {
 
         return cell
     }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "showDetail" {
+            let controller = segue.destination as! DetailViewController
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                controller.contact = contacts?.contact(at: indexPath)
+            }
+            
+        }
+    }
 }
