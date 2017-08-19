@@ -10,9 +10,12 @@ import UIKit
 
 class NewContactTableViewController: UITableViewController {
 
+    var contacts: Contacts?
+    
     @IBAction func saveContact(_ sender: Any) {
         // if all 4 text field check passed
         if checkAllFieldFilled() {
+            print(contacts?.contacts[0].detail ?? "Link contacts fail")
             self.navigationController?.popViewController(animated: true)
         }
     }

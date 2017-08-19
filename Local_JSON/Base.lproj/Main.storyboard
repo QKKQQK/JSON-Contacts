@@ -38,7 +38,7 @@
                     <navigationItem key="navigationItem" title="Contact" id="KYk-LM-1iB">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QI5-ML-Oj9">
                             <connections>
-                                <segue destination="heb-Sb-EO2" kind="show" id="4oC-cE-YsL"/>
+                                <segue destination="heb-Sb-EO2" kind="show" identifier="addContact" id="4oC-cE-YsL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -57,6 +57,9 @@ class TableViewController: UITableViewController {
                 controller.contact = contacts?.contact(at: indexPath)
             }
             
+        } else if segue.identifier == "addContact" {
+            let controller = segue.destination as! NewContactTableViewController
+            controller.contacts = contacts
         }
     }
 }
