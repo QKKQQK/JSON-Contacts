@@ -11,23 +11,26 @@ import UIKit
 class NewContactTableViewController: UITableViewController {
 
     var contacts: Contacts?
+    var data: [String] = []
     
     @IBAction func saveContact(_ sender: Any) {
         // if all 4 text field check passed
         if checkAllFieldFilled() {
-            print(contacts?.contacts[0].detail ?? "Link contacts fail")
+            contacts?.contacts.append(Contact(data: data))
             self.navigationController?.popViewController(animated: true)
         }
     }
     
     func checkAllFieldFilled() -> Bool {
         var allFilled = true
+        data = []
         for case let cell as UITableViewCell in self.view.subviews{
             for case let textField as UITextField in cell.contentView.subviews {
                 if textField.text == "" {
                     allFilled = false
                     textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)])
                 }
+                data.insert(textField.text ?? "N/A", at: 0)
             }
         }
         return allFilled

@@ -14,6 +14,13 @@ struct Contact: Codable, CustomStringConvertible {
     var email: String
     var cell: String
     
+    init(data: [String]) {
+        self.firstName = data[0]
+        self.lastName = data[1]
+        self.email = data[2]
+        self.cell = data[3]
+    }
+    
     var fullName:String {
         return "\(firstName) \(lastName)"
     }
