@@ -12,19 +12,18 @@ class NewContactTableViewController: UITableViewController {
 
     @IBAction func saveContact(_ sender: Any) {
         // if all 4 text field check passed
-        self.navigationController?.popViewController(animated: true)
+        if checkAllFieldFilled() {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func checkAllFieldFilled() -> Bool {
         var allFilled = true
-        for view in self.view.subviews{
-            if let tbView = view as? UITableView {
-                for cell in tbView.subviews {
-                    if let textField = cell as? UITextField {
-                        if (textField.text == "") {
-                            allFilled = false
-                        }
-                    }
+        for case let cell as UITableViewCell in self.view.subviews{
+            for case let textField as UITextField in cell.contentView.subviews {
+                if textField.text == "" {
+                    allFilled = false
+                    textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder!, attributes: [NSAttributedStringKey.foregroundColor: UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)])
                 }
             }
         }
