@@ -15,6 +15,22 @@ class NewContactTableViewController: UITableViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func checkAllFieldFilled() -> Bool {
+        var allFilled = true
+        for view in self.view.subviews{
+            if let tbView = view as? UITableView {
+                for cell in tbView.subviews {
+                    if let textField = cell as? UITextField {
+                        if (textField.text == "") {
+                            allFilled = false
+                        }
+                    }
+                }
+            }
+        }
+        return allFilled
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
