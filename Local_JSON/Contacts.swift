@@ -57,6 +57,7 @@ class Contacts {
     var hasSpecial = false
     var firstAlphabetIndex = 0
     var contacts: [Contact]
+    var sectionKeys: [String] = []
     var sectionedContacts: Dictionary<String, Array<Contact>> = [:]
     
     init() {
@@ -124,16 +125,10 @@ class Contacts {
             let key = getKey(contact)
             if var contactSection = sectionedContacts[key] {
                 contactSection.append(contact)
-//                contactSection.sort( by: {
-//                    if ($0.lastName != $1.lastName) {
-//                        return $0.lastName < $1.lastName
-//                    } else {
-//                        return $0.firstName < $1.firstName
-//                    }
-//                })
                 sectionedContacts.updateValue(contactSection, forKey: key)
             } else {
                 sectionedContacts.updateValue([contact], forKey: key)
+                sectionKeys.append(key)
             }
         }
     }
@@ -172,6 +167,7 @@ class Contacts {
             sectionedContacts.updateValue(contactSection, forKey: key)
         } else {
             sectionedContacts.updateValue([newContact], forKey: key)
+            sectionKeys.append(key)
         }
     }
     

@@ -86,6 +86,19 @@ class TableViewController: UITableViewController {
         return cell
     }
     
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if viewAll {
+            return []
+        }
+        var index = contacts?.sectionKeys
+        index?.sort()
+        if (contacts?.hasSpecial)! {
+            index?.remove(at: 0)
+            index?.append("#")
+        }
+        return index
+    }
+    
     @IBOutlet weak var toggleViewButton: UIBarButtonItem!
     
     @IBAction func toggleViewTapped(_ sender: Any) {
