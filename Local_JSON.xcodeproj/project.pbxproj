@@ -17,7 +17,6 @@
 		51BE9F591F433D2300FC7EF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BE9F571F433D2300FC7EF1 /* LaunchScreen.storyboard */; };
 		51BE9F661F433E5900FC7EF1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE9F651F433E5900FC7EF1 /* TableViewController.swift */; };
 		51BE9F681F43402E00FC7EF1 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BE9F671F43402E00FC7EF1 /* Contacts.swift */; };
-		51F34FCD1F4A0BE9002A971F /* ContactAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F34FCC1F4A0BE9002A971F /* ContactAll.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		51BE9F5A1F433D2300FC7EF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51BE9F651F433E5900FC7EF1 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		51BE9F671F43402E00FC7EF1 /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
-		51F34FCC1F4A0BE9002A971F /* ContactAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAll.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +70,6 @@
 				516AD75E1F45EFDB0016DF1E /* DetailViewController.swift */,
 				51BE9F651F433E5900FC7EF1 /* TableViewController.swift */,
 				51BE9F671F43402E00FC7EF1 /* Contacts.swift */,
-				51F34FCC1F4A0BE9002A971F /* ContactAll.swift */,
 				516FFE2E1F43490400D8220B /* Utilities.swift */,
 				51BE9F551F433D2300FC7EF1 /* Assets.xcassets */,
 				51BE9F571F433D2300FC7EF1 /* LaunchScreen.storyboard */,
@@ -159,7 +156,6 @@
 				516AD75F1F45EFDB0016DF1E /* DetailViewController.swift in Sources */,
 				516AD7611F4619200016DF1E /* NewContactTableViewController.swift in Sources */,
 				516FFE301F43493600D8220B /* Utilities.swift in Sources */,
-				51F34FCD1F4A0BE9002A971F /* ContactAll.swift in Sources */,
 				51BE9F4F1F433D2300FC7EF1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
