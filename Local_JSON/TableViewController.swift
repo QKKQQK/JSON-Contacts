@@ -72,7 +72,11 @@ class TableViewController: UITableViewController {
             let controller = segue.destination as! DetailViewController
             
             if let indexPath = tableView.indexPathForSelectedRow {
-                controller.contact = contacts?.contact(at: indexPath)
+               // controller.contact = contacts?.contact(at: indexPath)
+                
+                let keyList = contacts?.sectionedContacts.keys.sorted()
+                let key = keyList?[(indexPath.section + 1)%(keyList?.count)!]
+                controller.contact = contacts?.sectionedContacts[key!]![indexPath.row]
             }
             
         } else if segue.identifier == "addContact" {
