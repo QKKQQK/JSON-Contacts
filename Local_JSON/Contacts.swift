@@ -55,6 +55,7 @@ struct Contact: Codable, CustomStringConvertible {
 
 class Contacts {
     var hasSpecial = false
+    var firstAlphabetIndex = 0
     var contacts: [Contact]
     var sectionedContacts: Dictionary<String, Array<Contact>> = [:]
     
@@ -67,12 +68,30 @@ class Contacts {
         return contacts.count
     }
     
+    func findIndexOfFirstAlphabet() {
+        firstAlphabetIndex = 0
+        for contact in contacts {
+            do {
+                let regex = try NSRegularExpression(pattern: "[a-zA-Z]")
+                let key = contact.lastName.capitalized.prefix(1).description
+                let result = regex.matches(in: key, range: NSMakeRange(0, 1))
+                if result.count != 0 {
+                    break
+                } else {
+                    firstAlphabetIndex += 1
+                }
+            } catch {
+                print("Regex error in finding first alphabet contact")
+            }
+        }
+    }
+    
     func contact(at indexPath: IndexPath) -> Contact {
         if indexPath.row >= contacts.count {
-            return contacts[0]
+            return contacts[(0 + firstAlphabetIndex) & contacts.count]
         }
         
-        return contacts[indexPath.row]
+        return contacts[(indexPath.row + firstAlphabetIndex) % contacts.count]
     }
     
     func loadContacts() {
@@ -97,6 +116,7 @@ class Contacts {
                 
             }
         }
+        self.findIndexOfFirstAlphabet()
     }
     
     func loadSortedContacts() {
