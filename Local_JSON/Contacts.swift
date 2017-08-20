@@ -48,12 +48,11 @@ struct Contact: Codable, CustomStringConvertible {
 
 class Contacts {
     var contacts: [Contact]
-    var sortedContacts: Dictionary<String, Array<Contact>> = [:]
+    var sectionedContacts: Dictionary<String, Array<Contact>> = [:]
     
     init() {
         contacts = []
         loadContacts()
-        
     }
     
     var count: Int {
@@ -78,6 +77,7 @@ class Contacts {
             contacts = loadSavedContacts()
         }
         self.sort()
+        self.loadSortedContacts()
     }
     
     func sort() {
@@ -90,18 +90,46 @@ class Contacts {
                 
             }
         }
-        sortSortedContacts()
     }
     
-    func sortSortedContacts() {
+    func loadSortedContacts() {
         for contact in contacts {
             let key = contact.lastName.capitalized.prefix(1).description
-            if var contactSection = sortedContacts[key] {
+            if var contactSection = sectionedContacts[key] {
                 contactSection.append(contact)
-                sortedContacts.updateValue(contactSection, forKey: key)
+//                contactSection.sort( by: {
+//                    if ($0.lastName != $1.lastName) {
+//                        return $0.lastName < $1.lastName
+//                    } else {
+//                        return $0.firstName < $1.firstName
+//                    }
+//                })
+                sectionedContacts.updateValue(contactSection, forKey: key)
             } else {
-                sortedContacts.updateValue([contact], forKey: key)
+                sectionedContacts.updateValue([contact], forKey: key)
             }
+        }
+    }
+    
+    func addToContacts(newContact: Contact) {
+        contacts.append(newContact)
+        self.sort()
+    }
+    
+    func addToSectionedContacts(newContact: Contact) {
+        let key = newContact.lastName.capitalized.prefix(1).description
+        if var contactSection = sectionedContacts[key] {
+            contactSection.append(newContact)
+            contactSection.sort( by: {
+                if ($0.lastName != $1.lastName) {
+                    return $0.lastName < $1.lastName
+                } else {
+                    return $0.firstName < $1.firstName
+                }
+            })
+            sectionedContacts.updateValue(contactSection, forKey: key)
+        } else {
+            sectionedContacts.updateValue([newContact], forKey: key)
         }
     }
     

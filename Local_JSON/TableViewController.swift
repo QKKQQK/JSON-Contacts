@@ -14,7 +14,6 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,19 +25,28 @@ class TableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return contacts?.sectionedContacts.count ?? 1
+        //return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return contacts?.count ?? 0
+        let keyList = contacts?.sectionedContacts.keys.sorted()
+        let count = contacts?.sectionedContacts[keyList![section]]?.count
+        return count ?? 0
     }
 
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50.0
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
 
         let contact = contacts?.contact(at: indexPath)
-        cell.textLabel?.text = contact?.fullName
+        cell.textLabel?.text = "Test"
+            //contact?.fullName
 
         return cell
     }

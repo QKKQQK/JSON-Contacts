@@ -16,8 +16,8 @@ class NewContactTableViewController: UITableViewController {
     @IBAction func saveContact(_ sender: Any) {
         // if all 4 text field check passed
         if checkAllFieldFilled() {
-            contacts?.contacts.append(Contact(data: data))
-            contacts?.sort()
+            contacts?.addToContacts(newContact: Contact(data: data))
+            contacts?.addToSectionedContacts(newContact: Contact(data: data))
             contacts?.createContactsPlistFile()
             self.navigationController?.popViewController(animated: true)
         }
