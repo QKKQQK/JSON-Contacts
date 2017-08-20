@@ -49,8 +49,9 @@ class TableViewController: UITableViewController {
 
         let key = contacts?.sectionedContacts.keys.sorted()[indexPath.section]
         let currContact = contacts?.sectionedContacts[key!]![indexPath.row]
-        cell.textLabel?.text = currContact?.fullName
-            //contact?.fullName
+        //cell.textLabel?.text = currContact?.fullName
+        cell.textLabel?.attributedText = currContact?.boldLastName
+        //contact?.fullName
         return cell
     }
     

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Qiankang Zhou. All rights reserved.
 //
 import Foundation
+import UIKit
 
 struct Contact: Codable, CustomStringConvertible {
     var firstName: String
@@ -18,6 +19,12 @@ struct Contact: Codable, CustomStringConvertible {
         self.lastName = data[1]
         self.email = data[2]
         self.cell = data[3]
+    }
+    
+    var boldLastName: NSAttributedString {
+        let attributedFullName = NSMutableAttributedString(string: self.fullName)
+        attributedFullName.addAttributes([NSAttributedStringKey.font : UIFont.boldSystemFont(ofSize: 18)], range: NSMakeRange(firstName.count + 1, lastName.count))
+        return attributedFullName
     }
     
     var fullName:String {
