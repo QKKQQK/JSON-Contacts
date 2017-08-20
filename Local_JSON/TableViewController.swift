@@ -11,6 +11,7 @@ import UIKit
 class TableViewController: UITableViewController {
 
     var contacts : Contacts?
+    var viewAll = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +26,21 @@ class TableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return contacts?.sectionedContacts.count ?? 1
+        if viewAll {
+            return 1
+        } else {
+            return contacts?.sectionedContacts.count ?? 1
+        }
         //return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if (viewAll) {
+            return contacts?.count ?? 0
+        }
         let keyList = contacts?.sectionedContacts.keys.sorted()
-        var count = 0;
+        var count = 0
         if (contacts?.hasSpecial)! {
             count = (contacts?.sectionedContacts[keyList![(section + 1)%(keyList?.count)!]]?.count)!
         } else {
@@ -42,6 +50,9 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if viewAll {
+            return 0
+        }
         return 30.0
     }
     
@@ -56,6 +67,11 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
+        if (viewAll) {
+            let contact = contacts?.contact(at: indexPath)
+            cell.textLabel?.attributedText = contact?.boldLastName
+            return cell
+        }
         let keyList = contacts?.sectionedContacts.keys.sorted()
         var key = ""
         if (contacts?.hasSpecial)!{
@@ -68,6 +84,12 @@ class TableViewController: UITableViewController {
         cell.textLabel?.attributedText = currContact?.boldLastName
         //contact?.fullName
         return cell
+    }
+    
+    
+    @IBAction func toggleViewTapped(_ sender: Any) {
+        viewAll = !viewAll
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,15 +109,18 @@ class TableViewController: UITableViewController {
             
             if let indexPath = tableView.indexPathForSelectedRow {
                // controller.contact = contacts?.contact(at: indexPath)
-                
-                let keyList = contacts?.sectionedContacts.keys.sorted()
-                var key = ""
-                if (contacts?.hasSpecial)! {
-                    key = (keyList?[(indexPath.section + 1)%(keyList?.count)!])!
+                if (viewAll) {
+                    controller.contact = contacts?.contact(at: indexPath)
                 } else {
-                    key = (keyList?[indexPath.section])!
+                    let keyList = contacts?.sectionedContacts.keys.sorted()
+                    var key = ""
+                    if (contacts?.hasSpecial)! {
+                        key = (keyList?[(indexPath.section + 1)%(keyList?.count)!])!
+                    } else {
+                        key = (keyList?[indexPath.section])!
+                    }
+                    controller.contact = contacts?.sectionedContacts[key]![indexPath.row]
                 }
-                controller.contact = contacts?.sectionedContacts[key]![indexPath.row]
             }
             
         } else if segue.identifier == "addContact" {

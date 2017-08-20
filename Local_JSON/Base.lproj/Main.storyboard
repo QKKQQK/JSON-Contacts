@@ -36,6 +36,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contact" id="KYk-LM-1iB">
+                        <barButtonItem key="leftBarButtonItem" title="All" id="Rfa-5I-Jqi">
+                            <connections>
+                                <action selector="toggleViewTapped:" destination="Xsd-zY-Z0Z" id="NCL-GO-nTd"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QI5-ML-Oj9">
                             <connections>
                                 <segue destination="heb-Sb-EO2" kind="show" identifier="addContact" id="4oC-cE-YsL"/>
