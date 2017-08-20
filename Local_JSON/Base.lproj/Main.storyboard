@@ -47,6 +47,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="toggleViewButton" destination="Rfa-5I-Jqi" id="RTZ-ex-Feb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dlS-rl-db0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

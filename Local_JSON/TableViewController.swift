@@ -86,9 +86,15 @@ class TableViewController: UITableViewController {
         return cell
     }
     
+    @IBOutlet weak var toggleViewButton: UIBarButtonItem!
     
     @IBAction func toggleViewTapped(_ sender: Any) {
         viewAll = !viewAll
+        if viewAll {
+            toggleViewButton.title = "Section"
+        } else {
+            toggleViewButton.title = "All"
+        }
         self.tableView.reloadData()
     }
     
