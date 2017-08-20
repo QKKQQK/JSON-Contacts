@@ -37,9 +37,12 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0
+        return 40.0
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return contacts?.sectionedContacts.keys.sorted()[section]
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
@@ -48,7 +51,6 @@ class TableViewController: UITableViewController {
         let currContact = contacts?.sectionedContacts[key!]![indexPath.row]
         cell.textLabel?.text = currContact?.fullName
             //contact?.fullName
-
         return cell
     }
     
