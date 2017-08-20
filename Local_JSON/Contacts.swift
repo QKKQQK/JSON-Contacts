@@ -101,7 +101,7 @@ class Contacts {
     
     func loadSortedContacts() {
         for contact in contacts {
-            let key = contact.lastName.capitalized.prefix(1).description
+            let key = getKey(contact)
             if var contactSection = sectionedContacts[key] {
                 contactSection.append(contact)
 //                contactSection.sort( by: {
@@ -118,13 +118,27 @@ class Contacts {
         }
     }
     
-    func addToContacts(newContact: Contact) {
+    func getKey(_ newContact: Contact) -> String {
+        var key = newContact.lastName.capitalized.prefix(1).description
+        do {
+            let regex = try NSRegularExpression(pattern: "[a-zA-Z]")
+            let result = regex.matches(in: key, range: NSMakeRange(0, 1))
+            if result.count == 0 {
+                key = "#"
+            }
+        } catch {
+            print("Regex error")
+        }
+        return key
+    }
+    
+    func addToContacts(_ newContact: Contact) {
         contacts.append(newContact)
         self.sort()
     }
     
-    func addToSectionedContacts(newContact: Contact) {
-        let key = newContact.lastName.capitalized.prefix(1).description
+    func addToSectionedContacts(_ newContact: Contact) {
+        let key = getKey(newContact)
         if var contactSection = sectionedContacts[key] {
             contactSection.append(newContact)
             contactSection.sort( by: {
