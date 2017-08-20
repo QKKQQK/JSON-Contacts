@@ -48,7 +48,7 @@ struct Contact: Codable, CustomStringConvertible {
 
 class Contacts {
     var contacts: [Contact]
-    var sortedContacts: Dictionary<String, Array<String>> = [:]
+    var sortedContacts: Dictionary<String, Array<Contact>> = [:]
     
     init() {
         contacts = []
@@ -95,8 +95,13 @@ class Contacts {
     
     func sortSortedContacts() {
         for contact in contacts {
-            let key = contact.lastName.capitalized.prefix(1)
-            print(key)
+            let key = contact.lastName.capitalized.prefix(1).description
+            if var contactSection = sortedContacts[key] {
+                contactSection.append(contact)
+                sortedContacts.updateValue(contactSection, forKey: key)
+            } else {
+                sortedContacts.updateValue([contact], forKey: key)
+            }
         }
     }
     
