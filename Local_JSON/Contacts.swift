@@ -75,6 +75,19 @@ class Contacts {
             print("Loading contacts from app directory.")
             contacts = loadSavedContacts()
         }
+        self.sort()
+    }
+    
+    func sort() {
+        contacts.sort{
+            if ($0.lastName != $1.lastName) {
+                return $0.lastName < $1.lastName
+                
+            } else {
+                return $0.firstName < $1.firstName
+                
+            }
+        }
     }
     
     func loadBundledJSON() -> [Contact] {
