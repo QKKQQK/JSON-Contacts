@@ -91,7 +91,6 @@ class Contacts {
         contacts.sort{
             if ($0.lastName != $1.lastName) {
                 return $0.lastName < $1.lastName
-                
             } else {
                 return $0.firstName < $1.firstName
                 

@@ -32,7 +32,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let keyList = contacts?.sectionedContacts.keys.sorted()
-        let count = contacts?.sectionedContacts[keyList![section]]?.count
+        let count = contacts?.sectionedContacts[keyList![(section + 1)%(keyList?.count)!]]?.count
         return count ?? 0
     }
 
@@ -41,13 +41,14 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return contacts?.sectionedContacts.keys.sorted()[section]
+        let keyList = contacts?.sectionedContacts.keys.sorted()
+        return keyList?[(section + 1)%(keyList?.count)!]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
-
-        let key = contacts?.sectionedContacts.keys.sorted()[indexPath.section]
+        let keyList = contacts?.sectionedContacts.keys.sorted()
+        let key = keyList?[(indexPath.section + 1)%(keyList?.count)!]
         let currContact = contacts?.sectionedContacts[key!]![indexPath.row]
         //cell.textLabel?.text = currContact?.fullName
         cell.textLabel?.attributedText = currContact?.boldLastName
