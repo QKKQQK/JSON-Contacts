@@ -44,8 +44,9 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
 
-        let contact = contacts?.contact(at: indexPath)
-        cell.textLabel?.text = "Test"
+        let key = contacts?.sectionedContacts.keys.sorted()[indexPath.section]
+        let currContact = contacts?.sectionedContacts[key!]![indexPath.row]
+        cell.textLabel?.text = currContact?.fullName
             //contact?.fullName
 
         return cell
