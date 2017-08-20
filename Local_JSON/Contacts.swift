@@ -54,6 +54,7 @@ struct Contact: Codable, CustomStringConvertible {
 }
 
 class Contacts {
+    var hasSpecial = false
     var contacts: [Contact]
     var sectionedContacts: Dictionary<String, Array<Contact>> = [:]
     
@@ -123,6 +124,7 @@ class Contacts {
             let regex = try NSRegularExpression(pattern: "[a-zA-Z]")
             let result = regex.matches(in: key, range: NSMakeRange(0, 1))
             if result.count == 0 {
+                self.hasSpecial = true
                 key = "#"
             }
         } catch {

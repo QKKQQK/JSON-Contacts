@@ -32,8 +32,13 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let keyList = contacts?.sectionedContacts.keys.sorted()
-        let count = contacts?.sectionedContacts[keyList![(section + 1)%(keyList?.count)!]]?.count
-        return count ?? 0
+        var count = 0;
+        if (contacts?.hasSpecial)! {
+            count = (contacts?.sectionedContacts[keyList![(section + 1)%(keyList?.count)!]]?.count)!
+        } else {
+            count = (contacts?.sectionedContacts[keyList![section]]?.count)!
+        }
+        return count
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -42,14 +47,23 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let keyList = contacts?.sectionedContacts.keys.sorted()
-        return keyList?[(section + 1)%(keyList?.count)!]
+        if (contacts?.hasSpecial)! {
+            return keyList?[(section + 1)%(keyList?.count)!]
+        } else {
+            return keyList?[section]
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
         let keyList = contacts?.sectionedContacts.keys.sorted()
-        let key = keyList?[(indexPath.section + 1)%(keyList?.count)!]
-        let currContact = contacts?.sectionedContacts[key!]![indexPath.row]
+        var key = ""
+        if (contacts?.hasSpecial)!{
+            key = (keyList?[(indexPath.section + 1)%(keyList?.count)!])!
+        } else {
+            key = (keyList?[indexPath.section])!
+        }
+        let currContact = contacts?.sectionedContacts[key]![indexPath.row]
         //cell.textLabel?.text = currContact?.fullName
         cell.textLabel?.attributedText = currContact?.boldLastName
         //contact?.fullName
@@ -75,8 +89,13 @@ class TableViewController: UITableViewController {
                // controller.contact = contacts?.contact(at: indexPath)
                 
                 let keyList = contacts?.sectionedContacts.keys.sorted()
-                let key = keyList?[(indexPath.section + 1)%(keyList?.count)!]
-                controller.contact = contacts?.sectionedContacts[key!]![indexPath.row]
+                var key = ""
+                if (contacts?.hasSpecial)! {
+                    key = (keyList?[(indexPath.section + 1)%(keyList?.count)!])!
+                } else {
+                    key = (keyList?[indexPath.section])!
+                }
+                controller.contact = contacts?.sectionedContacts[key]![indexPath.row]
             }
             
         } else if segue.identifier == "addContact" {
