@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-struct Contact: Codable, CustomStringConvertible {
+struct Contact: Codable, CustomStringConvertible, Comparable {
+    
     var firstName: String
     var lastName: String
     var email: String
@@ -51,11 +52,49 @@ struct Contact: Codable, CustomStringConvertible {
     var description: String {
         return "\(firstName) \(lastName)"
     }
+    
+    var key: String {
+        var contactKey = lastName.capitalized.prefix(1).description
+        do {
+            let regex = try NSRegularExpression(pattern: "[a-zA-Z]")
+            let result = regex.matches(in: contactKey, range: NSMakeRange(0, 1))
+            if result.count == 0 {
+                contactKey = "#"
+            }
+        } catch {
+            print("Regex error")
+        }
+        return contactKey
+    }
+    
+    static func <(lhs: Contact, rhs: Contact) -> Bool {
+        if (lhs.key != "#" && rhs.key != "#") || (lhs.key == "#" && rhs.key == "#") {
+            if lhs.lastName != rhs.lastName {
+                return lhs.lastName < rhs.lastName
+            } else if lhs.firstName != rhs.firstName {
+                return lhs.firstName < rhs.firstName
+            } else if lhs.email != rhs.email {
+                return lhs.email < rhs.email
+            } else {
+                return lhs.cell < rhs.cell
+            }
+        } else if lhs.key == "#" && rhs.key != "#" {
+            return false
+        } else if lhs.key != "#" && rhs.key == "#" {
+            return true
+        } else {
+            print("Error in < compare")
+        }
+        return true
+    }
+    
+    static func ==(lhs: Contact, rhs: Contact) -> Bool {
+        return (lhs.firstName == rhs.firstName) && (lhs.lastName == rhs.lastName)
+            && (lhs.email == rhs.email) && (lhs.cell == rhs.cell)
+    }
 }
 
 class Contacts {
-    var hasSpecial = false
-    var firstAlphabetIndex = 0
     var contacts: [Contact]
     var sectionKeys: [String] = []
     var sectionedContacts: Dictionary<String, Array<Contact>> = [:]
@@ -69,30 +108,11 @@ class Contacts {
         return contacts.count
     }
     
-    func findIndexOfFirstAlphabet() {
-        firstAlphabetIndex = 0
-        for contact in contacts {
-            do {
-                let regex = try NSRegularExpression(pattern: "[a-zA-Z]")
-                let key = contact.lastName.capitalized.prefix(1).description
-                let result = regex.matches(in: key, range: NSMakeRange(0, 1))
-                if result.count != 0 {
-                    break
-                } else {
-                    firstAlphabetIndex += 1
-                }
-            } catch {
-                print("Regex error in finding first alphabet contact")
-            }
-        }
-    }
-    
     func contact(at indexPath: IndexPath) -> Contact {
         if indexPath.row >= contacts.count {
-            return contacts[(0 + firstAlphabetIndex) & contacts.count]
+            return contacts[0]
         }
-        
-        return contacts[(indexPath.row + firstAlphabetIndex) % contacts.count]
+        return contacts[indexPath.row]
     }
     
     func loadContacts() {
@@ -104,59 +124,44 @@ class Contacts {
             print("Loading contacts from app directory.")
             contacts = loadSavedContacts()
         }
-        self.sort()
+        contacts.sort()
         self.loadSortedContacts()
-    }
-    
-    func sort() {
-        contacts.sort{
-            if ($0.lastName != $1.lastName) {
-                return $0.lastName < $1.lastName
-            } else {
-                return $0.firstName < $1.firstName
-                
-            }
-        }
-        self.findIndexOfFirstAlphabet()
+        
     }
     
     func loadSortedContacts() {
         for contact in contacts {
-            let key = getKey(contact)
-            if var contactSection = sectionedContacts[key] {
+            if var contactSection = sectionedContacts[contact.key] {
                 contactSection.append(contact)
-                sectionedContacts.updateValue(contactSection, forKey: key)
+                sectionedContacts.updateValue(contactSection, forKey: contact.key)
             } else {
-                sectionedContacts.updateValue([contact], forKey: key)
-                sectionKeys.append(key)
+                sectionedContacts.updateValue([contact], forKey: contact.key)
+                sectionKeys.append(contact.key)
             }
         }
+        keySort()
     }
     
-    func getKey(_ newContact: Contact) -> String {
-        var key = newContact.lastName.capitalized.prefix(1).description
-        do {
-            let regex = try NSRegularExpression(pattern: "[a-zA-Z]")
-            let result = regex.matches(in: key, range: NSMakeRange(0, 1))
-            if result.count == 0 {
-                self.hasSpecial = true
-                key = "#"
+    func keySort() {
+        sectionKeys.sort(by: {
+            if $0 == "#" {
+                return false
+            } else if $1 == "#" {
+                return true
+            } else {
+                return $0 < $1
             }
-        } catch {
-            print("Regex error")
-        }
-        return key
+        })
     }
     
-    func addToContacts(_ newContact: Contact) {
-        contacts.append(newContact)
-        self.sort()
+    func addToContacts(_ contact: Contact) {
+        contacts.append(contact)
+        contacts.sort()
     }
     
-    func addToSectionedContacts(_ newContact: Contact) {
-        let key = getKey(newContact)
-        if var contactSection = sectionedContacts[key] {
-            contactSection.append(newContact)
+    func addToSectionedContacts(_ contact: Contact) {
+        if var contactSection = sectionedContacts[contact.key] {
+            contactSection.append(contact)
             contactSection.sort( by: {
                 if ($0.lastName != $1.lastName) {
                     return $0.lastName < $1.lastName
@@ -164,11 +169,12 @@ class Contacts {
                     return $0.firstName < $1.firstName
                 }
             })
-            sectionedContacts.updateValue(contactSection, forKey: key)
+            sectionedContacts.updateValue(contactSection, forKey: contact.key)
         } else {
-            sectionedContacts.updateValue([newContact], forKey: key)
-            sectionKeys.append(key)
+            sectionedContacts.updateValue([contact], forKey: contact.key)
+            sectionKeys.append(contact.key)
         }
+        keySort()
     }
     
     func loadBundledJSON() -> [Contact] {

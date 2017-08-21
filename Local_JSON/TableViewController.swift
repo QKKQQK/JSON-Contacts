@@ -39,14 +39,7 @@ class TableViewController: UITableViewController {
         if (viewAll) {
             return contacts?.count ?? 0
         }
-        let keyList = contacts?.sectionedContacts.keys.sorted()
-        var count = 0
-        if (contacts?.hasSpecial)! {
-            count = (contacts?.sectionedContacts[keyList![(section + 1)%(keyList?.count)!]]?.count)!
-        } else {
-            count = (contacts?.sectionedContacts[keyList![section]]?.count)!
-        }
-        return count
+        return (contacts?.sectionedContacts[(contacts?.sectionKeys[section])!]?.count)!
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -57,12 +50,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let keyList = contacts?.sectionedContacts.keys.sorted()
-        if (contacts?.hasSpecial)! {
-            return keyList?[(section + 1)%(keyList?.count)!]
-        } else {
-            return keyList?[section]
-        }
+        return contacts?.sectionKeys[section]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,17 +60,9 @@ class TableViewController: UITableViewController {
             cell.textLabel?.attributedText = contact?.boldLastName
             return cell
         }
-        let keyList = contacts?.sectionedContacts.keys.sorted()
-        var key = ""
-        if (contacts?.hasSpecial)!{
-            key = (keyList?[(indexPath.section + 1)%(keyList?.count)!])!
-        } else {
-            key = (keyList?[indexPath.section])!
-        }
-        let currContact = contacts?.sectionedContacts[key]![indexPath.row]
-        //cell.textLabel?.text = currContact?.fullName
+        let key = contacts?.sectionKeys[indexPath.section]
+        let currContact = contacts?.sectionedContacts[key!]![indexPath.row]
         cell.textLabel?.attributedText = currContact?.boldLastName
-        //contact?.fullName
         return cell
     }
     
@@ -90,13 +70,7 @@ class TableViewController: UITableViewController {
         if viewAll {
             return []
         }
-        var index = contacts?.sectionKeys
-        index?.sort()
-        if (contacts?.hasSpecial)! {
-            index?.remove(at: 0)
-            index?.append("#")
-        }
-        return index
+        return contacts?.sectionKeys
     }
     
     @IBOutlet weak var toggleViewButton: UIBarButtonItem!
@@ -131,14 +105,8 @@ class TableViewController: UITableViewController {
                 if (viewAll) {
                     controller.contact = contacts?.contact(at: indexPath)
                 } else {
-                    let keyList = contacts?.sectionedContacts.keys.sorted()
-                    var key = ""
-                    if (contacts?.hasSpecial)! {
-                        key = (keyList?[(indexPath.section + 1)%(keyList?.count)!])!
-                    } else {
-                        key = (keyList?[indexPath.section])!
-                    }
-                    controller.contact = contacts?.sectionedContacts[key]![indexPath.row]
+                    let key = contacts?.sectionKeys[indexPath.section]
+                    controller.contact = contacts?.sectionedContacts[key!]![indexPath.row]
                 }
             }
             
