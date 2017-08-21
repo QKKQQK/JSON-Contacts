@@ -191,6 +191,8 @@ class Contacts {
             return []
         }
         
+       print(contactsURL)
+        
         guard let contactsData = try? Data.init(contentsOf: contactsURL) else {
             print("Couldn't load data from app dir.")
             return []

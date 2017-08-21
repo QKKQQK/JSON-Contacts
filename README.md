@@ -1,14 +1,14 @@
 # Challenge3_Local_JSON_Kyle
 
-## Two Views
+## Two Layouts
 
-#### Section View
+#### Section Layout
 1. With bold last name and an alphabet scroll bar on right
-2. "All" is the toggle button for switching views
+2. "All" is the toggle button for switching layouts
 
 <img src="images/section.png" width = "50%">
 
-#### All View
+#### All Layout
 1. Reomve the scroll bar
 2. Toggle button title changed to "Section"
 
